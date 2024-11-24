@@ -57,13 +57,13 @@ namespace Graduation_Project.Controllers
         [HttpGet("GetAllMessagesForTrainee/{id}")]
         public async Task<IActionResult> GetChat(Guid id)
         {
-            var users = await mediator.Send(new GetAllMessagesForTraineeQuery(id));
+            var users = await mediator.Send(new GetAllMessagesForPatientQuery(id));
 
             return Ok(users);
         }
 
         [HttpPost("GetAllMessagesBetweenDoctorAndTrainee")]
-        public async Task<IActionResult> Get(GetAllMessagesWithTraineeQuery request)
+        public async Task<IActionResult> Get(GetAllMessagesWithPatientQuery request)
         { 
             var result = await mediator.Send(request);
 

@@ -5,16 +5,16 @@ using Graduation_Project.Domain.Entity.UserDomain;
 
 namespace Graduation_Project.Application.CQRS.ChatFeature.GetAllMessaagesForTrainee
 {
-    public class GetAllMessagesForTraineeQueryHandler : IQueryHandler<GetAllMessagesForTraineeQuery, List<User>>
+    public class GetAllMessagesForPatientQueryHandler : IQueryHandler<GetAllMessagesForPatientQuery, List<User>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public GetAllMessagesForTraineeQueryHandler(IUnitOfWork unitOfWork)
+        public GetAllMessagesForPatientQueryHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<List<User>>> Handle(GetAllMessagesForTraineeQuery request, CancellationToken cancellationToken)
+        public async Task<Result<List<User>>> Handle(GetAllMessagesForPatientQuery request, CancellationToken cancellationToken)
         {
             try
             {
