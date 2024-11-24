@@ -2,7 +2,7 @@
 using Graduation_Project.Application.Abstraction;
 using Graduation_Project.Domain.Abstraction;
 using Graduation_Project.Domain.Entity.PlanDomain;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 using Graduation_Project.Domain.Entity.UserDomain;
 
 namespace Graduation_Project.Application.CQRS.PlanFeature.AddPlan
@@ -20,7 +20,7 @@ namespace Graduation_Project.Application.CQRS.PlanFeature.AddPlan
         {
             try
             {
-                var plan = Plan.Create(request.name,request.duration,request.focus,request.sessions,request.price,UserId.Create(request.trainerId));
+                var plan = Plan.Create(request.name,request.duration,request.focus,request.sessions,request.price,UserId.Create(request.doctorId));
 
                 await _unitOfWork.PlanRepository.Add(plan);
 

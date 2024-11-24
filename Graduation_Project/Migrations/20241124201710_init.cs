@@ -51,6 +51,84 @@ namespace Graduation_Project.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "chats",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ReceiverId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Timestamp = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_chats", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "doctorRatings",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DoctorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    rating = table.Column<int>(type: "int", nullable: false),
+                    username = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_doctorRatings", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "doctors",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    About = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    image = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    AvgRating = table.Column<double>(type: "float", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_doctors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "medicalAdvisors",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    About = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    image = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    AvgRating = table.Column<double>(type: "float", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_medicalAdvisors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "plans",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Duration = table.Column<int>(type: "int", nullable: false),
+                    Focus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Sessions = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    DoctorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_plans", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "refreshTokens",
                 columns: table => new
                 {
@@ -65,19 +143,18 @@ namespace Graduation_Project.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "trainers",
+                name: "reservations",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Experience = table.Column<int>(type: "int", nullable: false),
-                    Specialization = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    DoctorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Patient = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PlanId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ReservedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_trainers", x => x.Id);
+                    table.PrimaryKey("PK_reservations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,15 +162,11 @@ namespace Graduation_Project.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NationalId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SecondName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     Gender = table.Column<int>(type: "int", nullable: false),
-                    TennisCourt = table.Column<int>(type: "int", nullable: false),
-                    TrainerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TimeSessionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    HealthCondition = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    DoctorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -265,10 +338,25 @@ namespace Graduation_Project.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "chats");
+
+            migrationBuilder.DropTable(
+                name: "doctorRatings");
+
+            migrationBuilder.DropTable(
+                name: "doctors");
+
+            migrationBuilder.DropTable(
+                name: "medicalAdvisors");
+
+            migrationBuilder.DropTable(
+                name: "plans");
+
+            migrationBuilder.DropTable(
                 name: "refreshTokens");
 
             migrationBuilder.DropTable(
-                name: "trainers");
+                name: "reservations");
 
             migrationBuilder.DropTable(
                 name: "users");

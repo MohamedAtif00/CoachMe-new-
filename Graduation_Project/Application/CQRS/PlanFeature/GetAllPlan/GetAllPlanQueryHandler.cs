@@ -2,7 +2,7 @@
 using Graduation_Project.Application.Abstraction;
 using Graduation_Project.Domain.Abstraction;
 using Graduation_Project.Domain.Entity.PlanDomain;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 using Graduation_Project.Domain.Entity.UserDomain;
 
 namespace Graduation_Project.Application.CQRS.PlanFeature.GetAllPlan
@@ -21,11 +21,11 @@ namespace Graduation_Project.Application.CQRS.PlanFeature.GetAllPlan
             try
             {
                 var id = UserId.Create(request.id);
-                var plans = await _unitOfWork.PlanRepository.GetAllPlanForTrainer(id);
+                var plans = await _unitOfWork.PlanRepository.GetAllPlanForDoctor(id);
 
 
 
-                //trainer.
+                //doctor.
                 return Result.Success(plans);
             }
             catch (Exception ex) {

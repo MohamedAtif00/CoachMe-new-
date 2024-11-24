@@ -1,5 +1,5 @@
 ﻿using Graduation_Project.Domain.Entity.PlanDomain;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 using Graduation_Project.Domain.Entity.UserDomain;
 using Graduation_Project.Domain.Repsitory.PlanRepo;
 using Graduation_Project.Infrastructure.Data;
@@ -14,9 +14,9 @@ namespace Graduation_Project.Infrastructure.Repositories
         {
         }
 
-        public async Task<List<Plan>> GetAllPlanForTrainer(UserId id)
+        public async Task<List<Plan>> GetAllPlanForDoctor(UserId id)
         {
-            return await _context.plans.Where(x => x.TrainerId == id).ToListAsync();
+            return await _context.plans.Where(x => x.DoctorId == id).ToListAsync();
         }
     }
 }

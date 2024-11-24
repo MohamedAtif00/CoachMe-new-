@@ -2,7 +2,7 @@
 
 namespace Graduation_Project.Application.CQRS.PlanFeature.AddPlan
 {
-    public record AddPlanCommand(string name,int duration, string focus, int sessions, decimal price,Guid trainerId) :ICommand;
+    public record AddPlanCommand(string name,int duration, string focus, int sessions, decimal price,Guid doctorId) :ICommand;
     
     
 }

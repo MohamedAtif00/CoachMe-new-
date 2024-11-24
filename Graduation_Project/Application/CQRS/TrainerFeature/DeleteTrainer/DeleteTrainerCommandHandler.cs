@@ -1,28 +1,28 @@
 ﻿using Ardalis.Result;
 using Graduation_Project.Application.Abstraction;
 using Graduation_Project.Domain.Abstraction;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 
-namespace Graduation_Project.Application.CQRS.TrainerFeature.DeleteTrainer
+namespace Graduation_Project.Application.CQRS.DoctorFeature.DeleteDoctor
 {
-    public class DeleteTrainerCommandHandler : ICommandHandler<DeleteTrainerCommand>
+    public class DeleteDoctorCommandHandler : ICommandHandler<DeleteDoctorCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteTrainerCommandHandler(IUnitOfWork unitOfWork)
+        public DeleteDoctorCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result> Handle(DeleteTrainerCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(DeleteDoctorCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                var trainer = await _unitOfWork.TrainerRepository.GetById(TrainerId.Create(request.id));
+                var doctor = await _unitOfWork.DoctorRepository.GetById(DoctorId.Create(request.id));
 
-                if (trainer == null) return Result.Error("trainer is not exist");
+                if (doctor == null) return Result.Error("doctor is not exist");
 
-                await _unitOfWork.TrainerRepository.Delete(trainer);
+                await _unitOfWork.DoctorRepository.Delete(doctor);
 
                 int saving = await _unitOfWork.save();
 

@@ -2,7 +2,7 @@
 using Graduation_Project.Application.Abstraction;
 using Graduation_Project.Domain.Abstraction;
 using Graduation_Project.Domain.Entity.ChatDomain;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 using Graduation_Project.Domain.Entity.UserDomain;
 
 namespace Graduation_Project.Application.CQRS.ChatFeature.GetAllMessagesWithTrainee
@@ -20,7 +20,7 @@ namespace Graduation_Project.Application.CQRS.ChatFeature.GetAllMessagesWithTrai
         {
             try
             {
-                var chats = await _unitOfWork.ChatRepository.GetAllMessagesBetweenTrainerAndTrainee(UserId.Create(request.sendId), UserId.Create(request.receiverId));
+                var chats = await _unitOfWork.ChatRepository.GetAllMessagesBetweenDoctorAndTrainee(UserId.Create(request.sendId), UserId.Create(request.receiverId));
 
                 return Result.Success(chats);
 

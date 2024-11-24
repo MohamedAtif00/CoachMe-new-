@@ -1,8 +1,8 @@
 ﻿using Graduation_Project.Application.Abstraction;
 
-namespace Graduation_Project.Application.CQRS.TrainerFeature.DeleteTrainer
+namespace Graduation_Project.Application.CQRS.DoctorFeature.DeleteDoctor
 {
-    public record DeleteTrainerCommand(Guid id):ICommand;
+    public record DeleteDoctorCommand(Guid id):ICommand;
     
     
 }

@@ -1,5 +1,5 @@
 ﻿using Graduation_Project.Domain.Abstraction;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 using Graduation_Project.Domain.Entity.UserDomain;
 
 namespace Graduation_Project.Domain.Entity.ChatDomain

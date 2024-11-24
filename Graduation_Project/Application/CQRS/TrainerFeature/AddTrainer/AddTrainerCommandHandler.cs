@@ -2,22 +2,21 @@
 using Graduation_Project.Application.Abstraction;
 using Graduation_Project.Domain.Abstraction;
 using Graduation_Project.Domain.Entity.MedicalAdvisorDomain;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 using Graduation_Project.Domain.Entity.UserDomain;
-using Graduation_Project.Migrations;
 
-namespace Graduation_Project.Application.CQRS.TrainerFeature.AddTrainer
+namespace Graduation_Project.Application.CQRS.DoctorFeature.AddDoctor
 {
-    public class AddTrainerCommandHandler : ICommandHandler<AddTrainerCommand>
+    public class AddDoctorCommandHandler : ICommandHandler<AddDoctorCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public AddTrainerCommandHandler(IUnitOfWork unitOfWork)
+        public AddDoctorCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result> Handle(AddTrainerCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(AddDoctorCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -29,7 +28,7 @@ namespace Graduation_Project.Application.CQRS.TrainerFeature.AddTrainer
                 }
 
 
-                var result = await _unitOfWork.TrainerRepository.Add(Trainer.Create(request.userId,request.username,file,request.email,request.about)); 
+                var result = await _unitOfWork.DoctorRepository.Add(Doctor.Create(request.userId,request.username,file,request.email,request.about)); 
 
                 int saving = await _unitOfWork.save();
 

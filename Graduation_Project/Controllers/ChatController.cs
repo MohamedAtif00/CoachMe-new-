@@ -1,6 +1,6 @@
 ﻿using Graduation_Project.Application.CQRS.ChatFeature.AddChat;
 using Graduation_Project.Application.CQRS.ChatFeature.GetAllMessaagesForTrainee;
-using Graduation_Project.Application.CQRS.ChatFeature.GetAllMessagesForTrainer;
+using Graduation_Project.Application.CQRS.ChatFeature.GetAllMessagesForDoctor;
 using Graduation_Project.Application.CQRS.ChatFeature.GetAllMessagesWithTrainee;
 using Graduation_Project.Application.Services;
 using MediatR;
@@ -46,10 +46,10 @@ namespace Graduation_Project.Controllers
         //    return "value";
         //}
 
-        [HttpGet("GetAllMessagesForTrainer/{id}")]
+        [HttpGet("GetAllMessagesForDoctor/{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var users = await mediator.Send(new GetAllMessagesForTrainerQuery(id));
+            var users = await mediator.Send(new GetAllMessagesForDoctorQuery(id));
 
             return Ok(users);
         }
@@ -62,7 +62,7 @@ namespace Graduation_Project.Controllers
             return Ok(users);
         }
 
-        [HttpPost("GetAllMessagesBetweenTrainerAndTrainee")]
+        [HttpPost("GetAllMessagesBetweenDoctorAndTrainee")]
         public async Task<IActionResult> Get(GetAllMessagesWithTraineeQuery request)
         { 
             var result = await mediator.Send(request);

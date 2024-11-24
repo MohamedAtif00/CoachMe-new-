@@ -2,7 +2,7 @@
 using Graduation_Project.Application.Abstraction;
 using Graduation_Project.Domain.Abstraction;
 using Graduation_Project.Domain.Entity.PlanDomain;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 using Graduation_Project.Domain.Entity.UserDomain;
 
 namespace Graduation_Project.Application.CQRS.PlanFeature.GetPlanByUserId
@@ -20,11 +20,11 @@ namespace Graduation_Project.Application.CQRS.PlanFeature.GetPlanByUserId
         {
             try
             {
-                var trainer = await _unitOfWork.TrainerRepository.GetById(TrainerId.Create(request.userId));
+                var doctor = await _unitOfWork.DoctorRepository.GetById(DoctorId.Create(request.userId));
 
-                if (trainer == null) return Result.Error("trainer is not exist");
+                if (doctor == null) return Result.Error("doctor is not exist");
 
-                var plans = await _unitOfWork.PlanRepository.GetAllPlanForTrainer(UserId.Create( trainer.Id.value));
+                var plans = await _unitOfWork.PlanRepository.GetAllPlanForDoctor(UserId.Create( doctor.Id.value));
 
                 return Result.Success(plans);
 

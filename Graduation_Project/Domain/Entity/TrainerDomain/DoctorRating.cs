@@ -1,25 +1,25 @@
 ﻿using Graduation_Project.Domain.Abstraction;
 using System.Text.Json.Serialization;
 
-namespace Graduation_Project.Domain.Entity.TrainerDomain
+namespace Graduation_Project.Domain.Entity.DoctorDomain
 {
-    public class TrainerRating : Entity<TrainerRatingId>
+    public class DoctorRating : Entity<DoctorRatingId>
     {
-        public TrainerRating(TrainerRatingId id, TrainerId trainerId, Rating rating, string username) : base(id)
+        public DoctorRating(DoctorRatingId id, DoctorId doctorId, Rating rating, string username) : base(id)
         {
-            this.trainerId = trainerId;
+            this.DoctorId = doctorId;
             this.rating = rating;
             this.username = username;
         }
 
-        public TrainerId trainerId { get;private set; }
+        public DoctorId DoctorId { get;private set; }
 
         public Rating rating { get; private set; }
         public string username { get; private set; }
 
-        public static TrainerRating Create(TrainerId trainerId, Rating rating,string username)
+        public static DoctorRating Create(DoctorId doctorId, Rating rating,string username)
         {
-            return new(TrainerRatingId.CreateUnique(),trainerId,rating,username);
+            return new(DoctorRatingId.CreateUnique(),doctorId,rating,username);
         }
 
         

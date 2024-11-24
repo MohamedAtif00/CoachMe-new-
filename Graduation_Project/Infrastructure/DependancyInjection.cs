@@ -3,10 +3,10 @@ using Graduation_Project.Domain.Abstraction;
 using Graduation_Project.Domain.Entity.MedicalAdvisorDomain;
 using Graduation_Project.Domain.Repsitory.AddMedicalAdvisorRepo;
 using Graduation_Project.Domain.Repsitory.ChatRepo;
+using Graduation_Project.Domain.Repsitory.DoctorRepo;
 using Graduation_Project.Domain.Repsitory.PlanRepo;
 using Graduation_Project.Domain.Repsitory.RefreshTokenRepo;
 using Graduation_Project.Domain.Repsitory.ReservationRepo;
-using Graduation_Project.Domain.Repsitory.TrainerRepo;
 using Graduation_Project.Domain.Repsitory.UserRepo;
 using Graduation_Project.Infrastructure.Data;
 using Graduation_Project.Infrastructure.DomainConfig;
@@ -80,8 +80,8 @@ namespace Graduation_Project.Infrastructure
 
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ITrainerRepository, TrainerRepository>();
-            services.AddScoped<ITrainerRatingRepository, TrainerRatingRepository>();
+            services.AddScoped<IDoctorRepository, DoctorRepository>();
+            services.AddScoped<IDoctorRatingRepository, DoctorRatingRepository>();
             services.AddScoped<IReservationRepository, ReservationRepository>();
             services.AddScoped<IPlanRepository, PlanRepository>();
             services.AddScoped<IChatRepository, ChatRepository>();

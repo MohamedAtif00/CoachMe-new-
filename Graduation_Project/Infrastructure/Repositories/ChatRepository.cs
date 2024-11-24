@@ -1,5 +1,5 @@
 ﻿using Graduation_Project.Domain.Entity.ChatDomain;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 using Graduation_Project.Domain.Entity.UserDomain;
 using Graduation_Project.Domain.Repsitory.ChatRepo;
 using Graduation_Project.Infrastructure.Data;
@@ -14,7 +14,7 @@ namespace Graduation_Project.Infrastructure.Repositories
         {
         }
 
-        public async Task<List<User>> GetAllMessagesForTrainer(UserId receiver)
+        public async Task<List<User>> GetAllMessagesForDoctor(UserId receiver)
         {
             return await _context.chats
                 .Where(chat => chat.ReceiverId == receiver)
@@ -34,7 +34,7 @@ namespace Graduation_Project.Infrastructure.Repositories
 
         }
 
-        public async Task<List<Chat>> GetAllMessagesBetweenTrainerAndTrainee(UserId userId,UserId UserId2)
+        public async Task<List<Chat>> GetAllMessagesBetweenDoctorAndTrainee(UserId userId,UserId UserId2)
         {
             return await _context.chats.Where((x => (x.SenderId == userId && x.ReceiverId == UserId2) ||(x.SenderId == UserId2 && x.ReceiverId == userId))).ToListAsync();
         }

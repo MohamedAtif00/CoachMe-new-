@@ -1,27 +1,27 @@
 ﻿using Ardalis.Result;
 using Graduation_Project.Application.Abstraction;
 using Graduation_Project.Domain.Abstraction;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 using Graduation_Project.Domain.Entity.UserDomain;
 
-namespace Graduation_Project.Application.CQRS.UserFeature.AddTrainer
+namespace Graduation_Project.Application.CQRS.UserFeature.AddDoctor
 {
-    public class AddTrainerAndCourtCommandHandler : ICommandHandler<AddTrainerAndCourtCommand, bool>
+    public class AddDoctorAndCourtCommandHandler : ICommandHandler<AddDoctorAndCourtCommand, bool>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public AddTrainerAndCourtCommandHandler(IUnitOfWork unitOfWork)
+        public AddDoctorAndCourtCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<bool>> Handle(AddTrainerAndCourtCommand request, CancellationToken cancellationToken)
+        public async Task<Result<bool>> Handle(AddDoctorAndCourtCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 var user = await _unitOfWork.UserRepository.GetById(UserId.Create(request.userId));
 
-                user.AddTrainerAndCourt(TrainerId.Create(request.trainerId));
+                user.AddDoctorAndCourt(DoctorId.Create(request.doctorId));
 
                 await _unitOfWork.UserRepository.Update(user);
 

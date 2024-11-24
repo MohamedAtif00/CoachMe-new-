@@ -34,8 +34,8 @@ namespace Graduation_Project.Controllers
         //}
 
         // GET api/<PlanController>/5
-        [HttpGet("GetAllPlanForTrainer/{id}")]
-        public async Task<IActionResult> GetAllPlanForTrainer(Guid id)
+        [HttpGet("GetAllPlanForDoctor/{id}")]
+        public async Task<IActionResult> GetAllPlanForDoctor(Guid id)
         {
             var result = await _mediator.Send(new GetAllPlanQuery(id));
 
@@ -43,8 +43,8 @@ namespace Graduation_Project.Controllers
         }
 
         // GET api/<PlanController>/5
-        //[HttpGet("GetAllPlanByTrainer/{id}")]
-        //public async Task<IActionResult> GetAllPlanByTrainer(Guid id)
+        //[HttpGet("GetAllPlanByDoctor/{id}")]
+        //public async Task<IActionResult> GetAllPlanByDoctor(Guid id)
         //{
         //    var result = await _mediator.Send(new GetPlanByUserIdQuery(id));
 

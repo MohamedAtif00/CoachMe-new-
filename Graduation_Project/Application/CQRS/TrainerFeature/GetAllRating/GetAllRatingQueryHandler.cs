@@ -1,11 +1,11 @@
 ﻿using Ardalis.Result;
 using Graduation_Project.Application.Abstraction;
 using Graduation_Project.Domain.Abstraction;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 
-namespace Graduation_Project.Application.CQRS.TrainerFeature.GetAllRating
+namespace Graduation_Project.Application.CQRS.DoctorFeature.GetAllRating
 {
-    public class GetAllRatingQueryHandler : IQueryHandler<GetAllRatingQuery, List<TrainerRating>>
+    public class GetAllRatingQueryHandler : IQueryHandler<GetAllRatingQuery, List<DoctorRating>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -14,13 +14,13 @@ namespace Graduation_Project.Application.CQRS.TrainerFeature.GetAllRating
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<List<TrainerRating>>> Handle(GetAllRatingQuery request, CancellationToken cancellationToken)
+        public async Task<Result<List<DoctorRating>>> Handle(GetAllRatingQuery request, CancellationToken cancellationToken)
         {
             try
             {
-                var trainers = await _unitOfWork.TrainerRatingRepository.GetAllRatingByTrainerId(TrainerId.Create(request.trainerId));
+                var doctors = await _unitOfWork.DoctorRatingRepository.GetAllRatingByDoctorId(DoctorId.Create(request.doctorId));
 
-                return Result.Success(trainers);
+                return Result.Success(doctors);
                 
             }catch (Exception ex)
             {

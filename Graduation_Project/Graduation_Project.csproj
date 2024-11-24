@@ -28,7 +28,7 @@
 
   <ItemGroup>
     <Folder Include="Application\CQRS\PlanFeature\GetSinglePlan\" />
-    <Folder Include="Application\DTOs\Trainer\request\" />
+    <Folder Include="Application\DTOs\Doctor\request\" />
   </ItemGroup>
 
 </Project>

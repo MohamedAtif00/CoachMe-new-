@@ -3,7 +3,7 @@ using Graduation_Project.Domain.Entity.MedicalAdvisorDomain;
 using Graduation_Project.Domain.Entity.PlanDomain;
 using Graduation_Project.Domain.Entity.RefreshTokenDomain;
 using Graduation_Project.Domain.Entity.ReservationDomain;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 using Graduation_Project.Domain.Entity.UserDomain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -21,8 +21,8 @@ namespace Graduation_Project.Infrastructure.Data
 
         public DbSet<RefreshToken> refreshTokens { get; set; }
         public DbSet<User> users { get; set; }
-        public DbSet<Trainer> trainers { get; set; }
-        public DbSet<TrainerRating> trainerRatings { get; set; }
+        public DbSet<Doctor> doctors { get; set; }
+        public DbSet<DoctorRating> doctorRatings { get; set; }
         public DbSet<Reservation> reservations { get; set; }
         public DbSet<Plan> plans { get; set; }
         public DbSet<Chat> chats { get; set; }

@@ -1,20 +1,20 @@
 ﻿using Graduation_Project.Domain.Abstraction;
 using Graduation_Project.Domain.Entity.RefreshTokenDomain;
 
-namespace Graduation_Project.Domain.Entity.TrainerDomain
+namespace Graduation_Project.Domain.Entity.DoctorDomain
 {
-    public class TrainerId : ValueObjectId
+    public class DoctorId : ValueObjectId
     {
-        protected TrainerId(Guid id) : base(id)
+        protected DoctorId(Guid id) : base(id)
         {
         }
 
-        public static TrainerId Create(Guid id)
+        public static DoctorId Create(Guid id)
         {
             return new(id);
         }
 
-        public static TrainerId CreateUnique()
+        public static DoctorId CreateUnique()
         {
             return new(Guid.NewGuid());
         }

@@ -1,16 +1,16 @@
-﻿using Graduation_Project.Domain.Entity.TrainerDomain;
+﻿using Graduation_Project.Domain.Entity.DoctorDomain;
 using Graduation_Project.Domain.Entity.UserDomain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Graduation_Project.Infrastructure.DomainConfig.TrainerConfig
+namespace Graduation_Project.Infrastructure.DomainConfig.DoctorConfig
 {
-    public class TrainerEntityTypeConfiguration : IEntityTypeConfiguration<Trainer>
+    public class DoctorEntityTypeConfiguration : IEntityTypeConfiguration<Doctor>
     {
-        public void Configure(EntityTypeBuilder<Trainer> builder)
+        public void Configure(EntityTypeBuilder<Doctor> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).HasConversion(x =>x.value,x =>TrainerId.Create(x));
+            builder.Property(x => x.Id).HasConversion(x =>x.value,x =>DoctorId.Create(x));
 
             //builder.Property()
         }

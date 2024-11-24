@@ -1,9 +1,9 @@
 ﻿using Graduation_Project.Application.Abstraction;
 using Graduation_Project.Domain.Entity.UserDomain;
 
-namespace Graduation_Project.Application.CQRS.UserFeature.AddTrainer
+namespace Graduation_Project.Application.CQRS.UserFeature.AddDoctor
 {
-    public record AddTrainerAndCourtCommand(Guid userId,Guid trainerId):ICommand<bool>;
+    public record AddDoctorAndCourtCommand(Guid userId,Guid doctorId):ICommand<bool>;
    
     
 }

@@ -1,9 +1,9 @@
 ﻿using Ardalis.Result;
 using Graduation_Project.Application.Abstraction;
 using Graduation_Project.Domain.Abstraction;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 
-namespace Graduation_Project.Application.CQRS.TrainerFeature.AddRating
+namespace Graduation_Project.Application.CQRS.DoctorFeature.AddRating
 {
     public class AddRatingCommandHandler : ICommandHandler<AddRatingCommand>
     {
@@ -18,13 +18,13 @@ namespace Graduation_Project.Application.CQRS.TrainerFeature.AddRating
         {
             try
             {
-                var rating = await _unitOfWork.TrainerRatingRepository.Add(TrainerRating.Create(TrainerId.Create(request.trainerId),request.Rating,request.username));
+                var rating = await _unitOfWork.DoctorRatingRepository.Add(DoctorRating.Create(DoctorId.Create(request.doctorId),request.Rating,request.username));
 
                 int saving1 = await _unitOfWork.save();
 
                 if (saving1 == 0) return Result.Error("no Change");
 
-                var ratings = await _unitOfWork.TrainerRatingRepository.GetAllRatingByTrainerId(TrainerId.Create(request.trainerId));
+                var ratings = await _unitOfWork.DoctorRatingRepository.GetAllRatingByDoctorId(DoctorId.Create(request.doctorId));
                 var arrayRatings = ratings.ToArray();
 
                 double avg = 0;
@@ -34,11 +34,11 @@ namespace Graduation_Project.Application.CQRS.TrainerFeature.AddRating
                 }
                 avg /= arrayRatings.Length;
 
-                var trainer = await _unitOfWork.TrainerRepository.GetById(TrainerId.Create(request.trainerId));
+                var doctor = await _unitOfWork.DoctorRepository.GetById(DoctorId.Create(request.doctorId));
 
-                trainer.ModifyAvgRating(avg);
+                doctor.ModifyAvgRating(avg);
 
-                await _unitOfWork.TrainerRepository.Update(trainer);
+                await _unitOfWork.DoctorRepository.Update(doctor);
 
                 int saving2 = await _unitOfWork.save();
 

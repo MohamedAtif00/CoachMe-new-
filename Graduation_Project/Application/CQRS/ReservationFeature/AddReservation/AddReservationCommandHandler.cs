@@ -4,7 +4,7 @@ using Graduation_Project.Domain.Abstraction;
 using Graduation_Project.Domain.Entity.ChatDomain;
 using Graduation_Project.Domain.Entity.PlanDomain;
 using Graduation_Project.Domain.Entity.ReservationDomain;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 using Graduation_Project.Domain.Entity.UserDomain;
 
 namespace Graduation_Project.Application.CQRS.ReservationFeature.AddReservation
@@ -23,21 +23,21 @@ namespace Graduation_Project.Application.CQRS.ReservationFeature.AddReservation
             try
             {
                 var reservation = await _unitOfWork.ReservationRepository.Add(Reservation.Create(
-                                                                                                TrainerId.Create(request.trainerId),
-                                                                                                UserId.Create(request.trainee),
+                                                                                                DoctorId.Create(request.doctorId),
+                                                                                                UserId.Create(request.patient),
                                                                                                 planId.Create(request.planId)
                                                                                                 )
                                                                                 );
 
 
-                // Send Message with plan name to the trainer
+                // Send Message with plan name to the doctor
                 var plan = await _unitOfWork.PlanRepository.GetById(planId.Create(request.planId));
 
-                var trainer = await _unitOfWork.TrainerRepository.GetById(TrainerId.Create(request.trainerId));
+                var doctor = await _unitOfWork.DoctorRepository.GetById(DoctorId.Create(request.doctorId));
 
-                var chat = Chat.Create(UserId.Create(request.trainee),
-                                       UserId.Create(request.trainerId),
-                                       $"Hi Captain {trainer.Username} I wanna Participate in {plan.Name} Plan");
+                var chat = Chat.Create(UserId.Create(request.patient),
+                                       UserId.Create(request.doctorId),
+                                       $"Hi Captain {doctor.Username} I wanna Participate in {plan.Name} Plan");
 
 
                 var message = await _unitOfWork.ChatRepository.Add(chat);

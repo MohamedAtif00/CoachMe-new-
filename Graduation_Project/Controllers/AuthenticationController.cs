@@ -9,10 +9,10 @@ using Graduation_Project.Application.CQRS.UserFeature.AddUser;
 using Graduation_Project.Domain.Entity.UserDomain;
 using Graduation_Project.Application.CQRS.UserFeature.GetSingleUser;
 using Graduation_Project.Application.CQRS.UserFeature.ValidateUser;
-using Graduation_Project.Application.CQRS.UserFeature.AddTrainer;
+using Graduation_Project.Application.CQRS.UserFeature.AddDoctor;
 using System.Linq.Expressions;
 using Graduation_Project.Application.CQRS.UserFeature.GetAllUsers;
-using Graduation_Project.Application.CQRS.TrainerFeature.AddTrainer;
+using Graduation_Project.Application.CQRS.DoctorFeature.AddDoctor;
 using Asp.Versioning;
 using Graduation_Project.Application.CQRS.MedicalAdvisorFeature.AddMedicalAdvisor;
 
@@ -75,24 +75,24 @@ namespace Graduation_Project.Controllers
         }
 
         // POST api/<AuthenticationController>
-        [HttpPost("TrainerRegister")]
-        public async Task<IActionResult> TrainerRegister([FromForm] TrainerRegisterRequest request)
+        [HttpPost("DoctorRegister")]
+        public async Task<IActionResult> DoctorRegister([FromForm] DoctorRegisterRequest request)
         {
-            var result = await _authenticationService.Register($"{request.firstName + request.lastName}", request.email, request.password, "Trainer");
+            var result = await _authenticationService.Register($"{request.firstName + request.lastName}", request.email, request.password, "Doctor");
 
             if (result.Value != null && result.Errors.Count() == 0) await _mediator.Send(new AddUserCommand(result.Value.UserId,
                                                                                                             request.firstName,
                                                                                                             request.lastName,
                                                                                                             request.image,
                                                                                                             request.gender));
-            if (result.Value != null && result.Errors.Count() == 0) await _mediator.Send(new AddTrainerCommand(result.Value.UserId,$"{request.firstName+" "+request.lastName }",request.email,request.image,request.about));
+            if (result.Value != null && result.Errors.Count() == 0) await _mediator.Send(new AddDoctorCommand(result.Value.UserId,$"{request.firstName+" "+request.lastName }",request.email,request.image,request.about));
 
                 return Ok(result);
         }
 
         // POST api/<AuthenticationController>
         [HttpPost("MedicalAdvisorRegister")]
-        public async Task<IActionResult> MedicalAdvisorRegister([FromForm] TrainerRegisterRequest request)
+        public async Task<IActionResult> MedicalAdvisorRegister([FromForm] DoctorRegisterRequest request)
         {   
             var result = await _authenticationService.Register($"{request.firstName + request.lastName}", request.email, request.password, "MedicalAdvisor");
 
@@ -107,8 +107,8 @@ namespace Graduation_Project.Controllers
         }
 
 
-        //[HttpPost("AddTrainerToUser")]
-        //public async Task<IActionResult> AddTrainer(AddTrainerAndCourtCommand request)
+        //[HttpPost("AddDoctorToUser")]
+        //public async Task<IActionResult> AddDoctor(AddDoctorAndCourtCommand request)
         //{
         //    var result = await _mediator.Send(request);
 
@@ -133,10 +133,10 @@ namespace Graduation_Project.Controllers
             return Ok(result);
         }
 
-        //[HttpPost("TrainerLogin")]
-        //public async Task<IActionResult> TrainerLogin([FromBody] LoginRequest request)
+        //[HttpPost("DoctorLogin")]
+        //public async Task<IActionResult> DoctorLogin([FromBody] LoginRequest request)
         //{
-        //    var result = await _authenticationService.Login(request.email, request.password, "Trainer");
+        //    var result = await _authenticationService.Login(request.email, request.password, "Doctor");
 
         //    return Ok(result);
         //}

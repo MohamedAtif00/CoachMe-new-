@@ -45,6 +45,55 @@ namespace Graduation_Project.Migrations
                     b.ToTable("chats");
                 });
 
+            modelBuilder.Entity("Graduation_Project.Domain.Entity.DoctorDomain.Doctor", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("About")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("AvgRating")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("image")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("doctors");
+                });
+
+            modelBuilder.Entity("Graduation_Project.Domain.Entity.DoctorDomain.DoctorRating", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DoctorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("rating")
+                        .HasColumnType("int");
+
+                    b.Property<string>("username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("doctorRatings");
+                });
+
             modelBuilder.Entity("Graduation_Project.Domain.Entity.MedicalAdvisorDomain.MedicalAdvisor", b =>
                 {
                     b.Property<Guid>("Id")
@@ -79,6 +128,9 @@ namespace Graduation_Project.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("DoctorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Duration")
                         .HasColumnType("int");
 
@@ -95,9 +147,6 @@ namespace Graduation_Project.Migrations
 
                     b.Property<int>("Sessions")
                         .HasColumnType("int");
-
-                    b.Property<Guid>("TrainerId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -128,75 +177,29 @@ namespace Graduation_Project.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("DoctorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("Patient")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("PlanId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("ReservedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Trainee")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TrainerId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.ToTable("reservations");
                 });
 
-            modelBuilder.Entity("Graduation_Project.Domain.Entity.TrainerDomain.Trainer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("About")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("AvgRating")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("image")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("trainers");
-                });
-
-            modelBuilder.Entity("Graduation_Project.Domain.Entity.TrainerDomain.TrainerRating", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("rating")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("trainerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("trainerRatings");
-                });
-
             modelBuilder.Entity("Graduation_Project.Domain.Entity.UserDomain.User", b =>
                 {
                     b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DoctorId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("FirstName")
@@ -213,9 +216,6 @@ namespace Graduation_Project.Migrations
                     b.Property<string>("SecondName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("TrainerId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 

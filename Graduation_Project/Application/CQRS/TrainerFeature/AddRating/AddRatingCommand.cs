@@ -1,9 +1,9 @@
 ﻿using Graduation_Project.Application.Abstraction;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 
-namespace Graduation_Project.Application.CQRS.TrainerFeature.AddRating
+namespace Graduation_Project.Application.CQRS.DoctorFeature.AddRating
 {
-    public record AddRatingCommand(Guid trainerId,Rating  Rating,string username):ICommand;
+    public record AddRatingCommand(Guid doctorId,Rating  Rating,string username):ICommand;
     
     
 }

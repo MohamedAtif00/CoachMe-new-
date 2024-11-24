@@ -1,9 +1,9 @@
 ﻿using Graduation_Project.Application.Abstraction;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 
-namespace Graduation_Project.Application.CQRS.TrainerFeature.GetAllTrainers
+namespace Graduation_Project.Application.CQRS.DoctorFeature.GetAllDoctors
 {
-    public record GetAllTrainersQuery() : IQuery<List<Trainer>>;
+    public record GetAllDoctorsQuery() : IQuery<List<Doctor>>;
     
     
 }

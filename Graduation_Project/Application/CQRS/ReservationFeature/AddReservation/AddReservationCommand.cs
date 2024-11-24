@@ -2,7 +2,7 @@
 
 namespace Graduation_Project.Application.CQRS.ReservationFeature.AddReservation
 {
-    public record AddReservationCommand(Guid trainerId, Guid trainee, Guid planId) :ICommand;
+    public record AddReservationCommand(Guid doctorId, Guid patient, Guid planId) :ICommand;
     
     
 }

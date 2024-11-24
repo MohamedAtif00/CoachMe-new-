@@ -1,26 +1,26 @@
 ﻿using Ardalis.Result;
 using Graduation_Project.Application.Abstraction;
 using Graduation_Project.Domain.Abstraction;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 
-namespace Graduation_Project.Application.CQRS.TrainerFeature.UpdateTrainer
+namespace Graduation_Project.Application.CQRS.DoctorFeature.UpdateDoctor
 {
-    public class UpdateTrainerCommandHandler : ICommandHandler<UpdateTrainerCommand>
+    public class UpdateDoctorCommandHandler : ICommandHandler<UpdateDoctorCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public UpdateTrainerCommandHandler(IUnitOfWork unitOfWork)
+        public UpdateDoctorCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result> Handle(UpdateTrainerCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(UpdateDoctorCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                var trainer = await _unitOfWork.TrainerRepository.GetById(TrainerId.Create(request.id));
+                var doctor = await _unitOfWork.DoctorRepository.GetById(DoctorId.Create(request.id));
 
-                if (trainer == null) return Result.Error("this trainer is not exist");
+                if (doctor == null) return Result.Error("this doctor is not exist");
 
                 byte[] file;
                 using (MemoryStream memoryStream = new MemoryStream())
@@ -29,9 +29,9 @@ namespace Graduation_Project.Application.CQRS.TrainerFeature.UpdateTrainer
                     file = memoryStream.ToArray();
                 }
 
-                trainer.Update(request.username, file, request.email);
+                doctor.Update(request.username, file, request.email);
 
-                 await _unitOfWork.TrainerRepository.Update(trainer);
+                 await _unitOfWork.DoctorRepository.Update(doctor);
 
                 int saving = await _unitOfWork.save();
 

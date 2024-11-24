@@ -1,5 +1,5 @@
 ﻿using Graduation_Project.Domain.Abstraction;
-using Graduation_Project.Domain.Entity.TrainerDomain;
+using Graduation_Project.Domain.Entity.DoctorDomain;
 using Microsoft.AspNetCore.Identity;
 using System.Text.Json.Serialization;
 
@@ -22,16 +22,16 @@ namespace Graduation_Project.Domain.Entity.UserDomain
         public string SecondName { get;private set; }
         public byte[] Image { get; private set; }
         public Gender Gender { get; private set; }
-        public TrainerId? TrainerId { get; private set; }
+        public DoctorId? DoctorId { get; private set; }
 
         public static User Create(Guid userId,string firstName,string secondName, byte[] image,Gender gender)
         {
             return new(UserId.Create(userId),firstName,secondName, image,gender);
         }
 
-        public void AddTrainerAndCourt(TrainerId trainerId)
+        public void AddDoctorAndCourt(DoctorId doctorId)
         {
-            TrainerId = trainerId;
+            DoctorId = doctorId;
         }
 
 
